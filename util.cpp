@@ -16,12 +16,30 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
+  std::set<string> wordset;
+  std::string temp;
+  rawWords = convToLower(rawWords);
+   
+  for(std::string::iterator it = rawWords.begin(); it!= rawWords.end(); it++){
+    if(std::isalnum(*it)){ //if char is alphabet or number
 
+        temp += *it;
 
+    }else{ //punctuation or space
+      if(temp.length()>=2){ //only process word >=2 characters
 
+        wordset.insert(temp);
+      }
 
+      temp.clear();
+      }
 
+    }
+    if(temp.length()>=2){ //process the last word
 
+      wordset.insert(temp);
+    }
+  return wordset;
 
 
 
